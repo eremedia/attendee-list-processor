@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "attendee-list-processor",
-    version = "0.1",
+    version = "0.2",
     packages = find_packages(),
     description="Process attendee lists; generate QR codes.",
     entry_points = {

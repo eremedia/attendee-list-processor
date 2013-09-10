@@ -101,10 +101,10 @@ def main():
 
         # Download the file from Google Charts
         print "Downloading QR code for %s %s..." % (first_name, last_name)
-        #download_remote_url_to_local_filepath(remote_url=qr_code_url, local_dest=local_qr_code_path)
+        download_remote_url_to_local_filepath(remote_url=qr_code_url, local_dest=local_qr_code_path)
 
-        ## Sleep a bit so we don't get banned
-        #time.sleep(.1)
+        # Sleep a bit so we don't get banned
+        time.sleep(.1)
 
         processed_data.rpush([
             first_name,
@@ -114,7 +114,6 @@ def main():
             local_qr_code_path
         ], tags=[row["attendance_type"]])
 
-    processed_data = processed_data.sort("last_name")
     print ""
     print "All QR codes downloaded!"
 
@@ -124,7 +123,7 @@ def main():
     print ""
     for at in attendance_types:
         with open(export_filenames[at], "wb") as f:
-            f.write(processed_data.filter([at]).csv)
+            f.write(processed_data.filter([at]).sort("last_name").csv)
         print "'%s' created." % export_filenames[at]
 
     print ""
